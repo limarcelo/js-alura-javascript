@@ -20,21 +20,30 @@ for(var i = 0; i < pacientes.length; i++){
     if(peso < 0 || peso > 1000){
         pesoValido = false;
         tdImc.textContent = "Peso inválido";
+        pacientes[i].classList.add("paciente-invalido");
     }
 
     if(altura < 0 || altura > 3.00){
         alturaValida = false;
         tdImc.textContent = "Altura inválida";
+        pacientes[i].classList.add("paciente-invalido");
     }
 
     if(pesoValido && alturaValida){
         var imc = peso / (altura * altura);
-        tdImc.textContent = imc.toFixed(2) ;
+        tdImc.textContent = imc.toFixed(2);
     }
-
 }
 
+var botaoAdicionar = document.querySelector("#adicionar-paciente");
+botaoAdicionar.addEventListener("click", function (event){
+   event.preventDefault(); //previne comportamento padrao do button
+   console.log("Clicado!");
+});
 
+titulo.addEventListener("click", function mostraMensagem(){
+    console.log("Olá, eventode click com função anonima!");
+});
 
 
 
