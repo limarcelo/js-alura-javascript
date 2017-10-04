@@ -2,8 +2,7 @@
 var titulo = document.querySelector(".titulo");
 titulo.textContent = "Aparecida Nutricionista - MS";
 
-var pesoValido = true;
-var alturaValida = true;
+
 
 var pacientes =  document.querySelectorAll(".paciente");
 console.log(pacientes);
@@ -17,33 +16,45 @@ for(var i = 0; i < pacientes.length; i++){
 
     var tdImc = pacientes[i].querySelector(".info-imc");
 
-    if(peso < 0 || peso > 1000){
-        pesoValido = false;
+    var pesoValido = validaPeso(peso);
+    var alturaValida = validaAltura(altura);
+
+    if(!pesoValido){
         tdImc.textContent = "Peso inválido";
         pacientes[i].classList.add("paciente-invalido");
     }
 
-    if(altura < 0 || altura > 3.00){
-        alturaValida = false;
+    if(!alturaValida){
         tdImc.textContent = "Altura inválida";
         pacientes[i].classList.add("paciente-invalido");
     }
 
     if(pesoValido && alturaValida){
-        var imc = peso / (altura * altura);
-        tdImc.textContent = imc.toFixed(2);
+        var imc = calculaImc(peso,altura);
+        tdImc.textContent = imc;
     }
 }
 
-var botaoAdicionar = document.querySelector("#adicionar-paciente");
-botaoAdicionar.addEventListener("click", function (event){
-   event.preventDefault(); //previne comportamento padrao do button
-   console.log("Clicado!");
-});
+function validaPeso(peso) {
+    if(peso >= 0 && peso < 1000){
+        return true;
+    }else{
+        return false;
+    }
+}
 
-titulo.addEventListener("click", function mostraMensagem(){
-    console.log("Olá, eventode click com função anonima!");
-});
+function validaAltura(altura) {
+    if(altura >= 0 && altura < 3){
+        return true;
+    }else{
+        return false;
+    }
+}
 
+function calculaImc(peso, altura){
+    var imc = 0;
+    imc = peso / (altura * altura);
+    return imc.toFixed(2);
+}
 
 
